@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVDVault.WebAPI", "DVDVaultAPI\DVDVault.WebAPI.csproj", "{4482273A-8735-4293-AED6-61DDBE7FD20A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVDVault.Application", "DVDVaultAPI.Application\DVDVault.Application.csproj", "{4FC817A5-F7DB-4D03-B36F-A9D83472887A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVDVault.Domain", "DVDVault.Domain\DVDVault.Domain.csproj", "{78D26CAB-85EF-4286-B838-AA39FD7C912A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVDVault.Infra", "DVDVault.Infra\DVDVault.Infra.csproj", "{90780017-08E4-460C-872A-0F66BD1C6E15}"
+	ProjectSection(ProjectDependencies) = postProject
+		{78D26CAB-85EF-4286-B838-AA39FD7C912A} = {78D26CAB-85EF-4286-B838-AA39FD7C912A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVDVault.Tests", "DVDVault.Tests\DVDVault.Tests.csproj", "{D48A57A7-20B6-468A-8507-85674895B46B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4482273A-8735-4293-AED6-61DDBE7FD20A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4482273A-8735-4293-AED6-61DDBE7FD20A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4482273A-8735-4293-AED6-61DDBE7FD20A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4482273A-8735-4293-AED6-61DDBE7FD20A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FC817A5-F7DB-4D03-B36F-A9D83472887A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FC817A5-F7DB-4D03-B36F-A9D83472887A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FC817A5-F7DB-4D03-B36F-A9D83472887A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FC817A5-F7DB-4D03-B36F-A9D83472887A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78D26CAB-85EF-4286-B838-AA39FD7C912A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78D26CAB-85EF-4286-B838-AA39FD7C912A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78D26CAB-85EF-4286-B838-AA39FD7C912A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78D26CAB-85EF-4286-B838-AA39FD7C912A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90780017-08E4-460C-872A-0F66BD1C6E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90780017-08E4-460C-872A-0F66BD1C6E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90780017-08E4-460C-872A-0F66BD1C6E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90780017-08E4-460C-872A-0F66BD1C6E15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D48A57A7-20B6-468A-8507-85674895B46B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D48A57A7-20B6-468A-8507-85674895B46B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D48A57A7-20B6-468A-8507-85674895B46B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D48A57A7-20B6-468A-8507-85674895B46B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92574B81-0722-406C-8378-6F08C9A1C09C}
+	EndGlobalSection
+EndGlobal
