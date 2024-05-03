@@ -3,7 +3,7 @@
 namespace DVDVault.Domain.Models;
 public class DVD
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     public string Title { get; set; } = null!;
 

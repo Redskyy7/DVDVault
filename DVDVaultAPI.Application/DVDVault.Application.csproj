@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DVDVault.Domain\DVDVault.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
