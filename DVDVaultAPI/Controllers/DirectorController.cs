@@ -7,7 +7,7 @@ using System.Net;
 namespace DVDVaultAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class DirectorController : ControllerBase
     {
 
