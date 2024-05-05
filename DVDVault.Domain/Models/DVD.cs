@@ -1,8 +1,10 @@
 ﻿using DVDVault.Domain.Enums;
+using DVDVault.Shared.Entities;
 
 namespace DVDVault.Domain.Models;
-public class DVD
+public class DVD : Entity
 {
+
     public int Id { get; set; }
 
     public string Title { get; set; } = null!;
@@ -20,4 +22,8 @@ public class DVD
     public DateTime? UpdatedAt { get; set; }
 
     public DateTime? DeletedAt { get; set; }
+
+    public int DirectorId { get; set; }
+
+    public Director? Director { get; set; }
 }
