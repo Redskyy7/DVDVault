@@ -27,6 +27,10 @@ public static class ServicesExtension
     private static void AddDirectorHandlers(WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<ICreateDirectorHandler, CreateDirectorHandler>();
+        builder.Services.AddScoped<IUpdateDirectorNameHandler, UpdateDirectorNameHandler>();
+        builder.Services.AddScoped<IUpdateDirectorSurnameHandler, UpdateDirectorSurnameHandler>();
+        builder.Services.AddScoped<ISoftDeleteDirectorHandler, SoftDeleteDirectorHandler>();
+        builder.Services.AddScoped<IHardDeleteDirectorHandler, HardDeleteDirectorHandler>();
     }
 
     private static void AddRepository(WebApplicationBuilder builder)

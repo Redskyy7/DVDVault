@@ -29,4 +29,50 @@ public sealed class DirectorRepository : IDirectorRepository
 
         return result;
     }
+
+    public async Task<bool> UpdateNameAsync(int id, Director director)
+    {
+        var updated = await _context
+            .Directors
+            .Where(x => x.Id == id)
+            .ExecuteUpdateAsync(x => 
+                            x.SetProperty(x => x.Name, director.Name)
+                            .SetProperty(x => x.UpdatedAt, director.UpdatedAt));
+
+        return updated != 0;
+    }
+
+    public async Task<bool> UpdateSurnameAsync(int id, Director director)
+    {
+        var updated = await _context
+            .Directors
+            .Where(x => x.Id == id)
+            .ExecuteUpdateAsync(x => 
+                            x.SetProperty(x => x.Surname, director.Surname)
+                            .SetProperty(x => x.UpdatedAt, director.UpdatedAt));
+
+        return updated != 0;
+    }
+
+    public async Task<bool> SoftDelete(int id, Director director)
+    {
+        var updated = await _context
+            .Directors
+            .Where(x => x.Id == id)
+            .ExecuteUpdateAsync(x =>
+                            x.SetProperty(x => x.IsActive, director.IsActive)
+                            .SetProperty(x => x.DeletedAt, director.DeletedAt));
+
+        return updated != 0;          
+    }
+
+    public async Task<bool> HardDelete(Director director)
+    {
+        var deleted = await _context
+                            .Directors
+                            .Where(x => x.Id == director.Id)
+                            .ExecuteDeleteAsync();
+
+        return deleted != 0;
+    }
 }

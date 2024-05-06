@@ -17,6 +17,11 @@ public sealed class DirectorMap : IEntityTypeConfiguration<Director>
 
         builder.Property(x => x.Id);
 
+        builder.Property(x => x.IsActive)
+            .HasColumnName("IsActive")
+            .HasColumnType("boolean")
+            .IsRequired();
+
         builder.Property(x => x.Name)
             .HasColumnName("Name")
             .HasColumnType("char(20)")
@@ -36,7 +41,7 @@ public sealed class DirectorMap : IEntityTypeConfiguration<Director>
             .HasColumnName("UpdatedAt")
             .HasColumnType("timestamp");
 
-        builder.Property(x => x.CreatedAt)
+        builder.Property(x => x.DeletedAt)
             .HasColumnName("DeletedAt")
             .HasColumnType("timestamp");
 

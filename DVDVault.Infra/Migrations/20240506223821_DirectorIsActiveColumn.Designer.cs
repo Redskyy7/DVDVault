@@ -3,6 +3,7 @@ using System;
 using DVDVault.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DVDVault.Infra.Migrations
 {
     [DbContext(typeof(DVDVaultContext))]
-    partial class DVDVaultContextModelSnapshot : ModelSnapshot
+    [Migration("20240506223821_DirectorIsActiveColumn")]
+    partial class DirectorIsActiveColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,11 +88,10 @@ namespace DVDVault.Infra.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp")
-                        .HasColumnName("CreatedAt");
+                        .HasColumnName("DeletedAt");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("DeletedAt");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean")
@@ -111,7 +113,11 @@ namespace DVDVault.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Directors", (string)null);
+                    b.ToTable("Directors", null, t =>
+                        {
+                            t.Property("DeletedAt")
+                                .HasColumnName("DeletedAt1");
+                        });
                 });
 
             modelBuilder.Entity("DVDVault.Domain.Models.DVD", b =>

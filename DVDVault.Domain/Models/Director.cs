@@ -12,6 +12,7 @@ public class Director : Entity, IValidate
     {
         Name = name;
         Surname = surname;
+        IsActive = true;
         CreatedAt = DateTime.Now;
         Validate();
     }
@@ -34,6 +35,8 @@ public class Director : Entity, IValidate
     [IfNull(ErrorMessage = "Invalid Surname.")]
     public string Surname { get; set; } = null!;
 
+    public bool IsActive {  get; set; }
+
     public DateTime CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
@@ -45,6 +48,34 @@ public class Director : Entity, IValidate
     public string GetFullName()
     {
         return $"{Name} {Surname}";
+    }
+
+    public void UpdateName(string name)
+    {
+        Name = name;
+        UpdatedAt = DateTime.Now;
+        Validate();
+    }
+
+    public void UpdateSurname(string surname)
+    {
+        Surname = surname;
+        UpdatedAt = DateTime.Now;
+        Validate();
+    }
+
+    public void SoftDelete()
+    {
+        IsActive = false;
+        DeletedAt = DateTime.Now;
+        Validate();
+    }
+
+    public void Activate()
+    {
+        IsActive = true;
+        DeletedAt = null;
+        Validate();
     }
 }
 
