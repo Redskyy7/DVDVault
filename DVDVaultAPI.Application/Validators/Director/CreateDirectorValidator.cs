@@ -15,7 +15,7 @@ public class CreateDirectorValidator : AbstractValidator<CreateDirectorRequest>
         RuleFor(x => x.Surname)
             .NotEmpty()
                 .WithMessage("Invalid surname")
-            .Length(5, 100)
-                .WithMessage("Surname should have between 5 and 100 characters.");
+            .Length(2, 100)
+                .WithMessage("Surname should have between 2 and 100 characters.");
     }
 }

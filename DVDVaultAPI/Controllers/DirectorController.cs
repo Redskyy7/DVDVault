@@ -21,18 +21,14 @@ namespace DVDVaultAPI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CreatedSuccessfully))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(InvalidRequest))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public Task<IActionResult> CreateDirector(CreateDirectorRequest request, CancellationToken cancellationToken)
         {
             var response = _createDirectorHandler.Handle(request, cancellationToken);
 
             if (response.Result.StatusCode == HttpStatusCode.BadRequest)
-                return Task.FromResult<IActionResult>(BadRequest());
-
-            if (response.Result.StatusCode == HttpStatusCode.Created)
-                return Task.FromResult<IActionResult>(Created());
-
-            return Task.FromResult<IActionResult>(StatusCode(StatusCodes.Status500InternalServerError));
+                return Task.FromResult<IActionResult>(BadRequest(response));
+            
+            return Task.FromResult<IActionResult>(Created("/Director/CreateDirector", response.Result.Message));
         }
     }
 }
