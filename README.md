@@ -1,5 +1,3 @@
-Claro! Aqui está uma versão aprimorada e expandida do seu texto para o README:
-
 ---
 
 ## Configuração do Ambiente Local
