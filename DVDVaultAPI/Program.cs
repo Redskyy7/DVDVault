@@ -4,6 +4,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddStackExchangeRedisCache(o =>
+{
+    o.InstanceName = "instance";
+    o.Configuration = "localhost:6379";
+});
 builder.Services.AddControllers();
 builder.Services.AddContext(builder.Configuration);
 builder.AddDependencies();

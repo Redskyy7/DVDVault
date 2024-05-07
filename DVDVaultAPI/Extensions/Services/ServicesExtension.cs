@@ -5,6 +5,7 @@ using DVDVault.Application.UseCases.DVDs.Handler;
 using DVDVault.Domain.Interfaces.Repositories;
 using DVDVault.Domain.Interfaces.Services;
 using DVDVault.Domain.Interfaces.UnitOfWork;
+using DVDVault.Infra.Caching;
 using DVDVault.Infra.Data.Context;
 using DVDVault.Infra.Repositories;
 using DVDVault.Infra.Services;
@@ -48,6 +49,7 @@ public static class ServicesExtension
     private static void AddServices(WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<IDVDService, DVDService>();
+        builder.Services.AddScoped<ICachingService, CachingService>();
     }
 
     private static void AddRepository(WebApplicationBuilder builder)
