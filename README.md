@@ -26,6 +26,8 @@ O projeto é desenvolvido em C# utilizando o framework .NET 8. Certifique-se de 
 
 Com o Redis e o PostgreSQL configurados, você precisa atualizar o banco de dados para garantir que esteja sincronizado com as últimas alterações no modelo de dados. Para isso, siga as instruções abaixo:
 
+Configure a ConnectionString para o seu banco de dados no appsettings.json
+
 1. Abra um terminal e navegue até a pasta `DVDVault.Infra`.
 2. Execute o comando `dotnet ef database update`.
 
