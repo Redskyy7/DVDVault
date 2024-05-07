@@ -9,7 +9,7 @@ public class DVD : Entity
 {
     public DVD() { }
 
-    public DVD(string title, string genre, DateTime published, int copies, int directorId)
+    public DVD(string title, string genre, DateOnly published, int copies, int directorId)
     {
         Title = title;
         Genre = genre;
@@ -35,7 +35,7 @@ public class DVD : Entity
 
     public string Genre { get; set; } = null!;
 
-    public DateTime Published { get; set; }
+    public DateOnly Published { get; set; }
 
     public int Copies { get; set; }
 

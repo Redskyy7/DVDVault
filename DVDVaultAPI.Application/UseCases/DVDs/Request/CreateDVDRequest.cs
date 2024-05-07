@@ -6,7 +6,7 @@ using FluentValidation.Results;
 namespace DVDVault.Application.UseCases.DVDs.Request;
 public class CreateDVDRequest : IRequest
 {
-    public CreateDVDRequest(string title, string genre, DateTime published, int copies, int directorId)
+    public CreateDVDRequest(string title, string genre, DateOnly published, int copies, int directorId)
     {
         Title = title;
         Genre = genre;
@@ -19,7 +19,7 @@ public class CreateDVDRequest : IRequest
 
     public string? Genre { get; set; }
 
-    public DateTime Published { get; set; }
+    public DateOnly Published { get; set; }
 
     public int Copies { get; set; }
 

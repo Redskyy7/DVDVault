@@ -6,7 +6,7 @@ public class DVDDTO
     public int Id { get; set; }
     public string Title { get; set; } = null!;
     public string Genre { get; set; } = null!;
-    public DateTime Published {  get; set; }
+    public DateOnly Published {  get; set; }
     public int Copies { get; set; }
     public bool Available { get; set; }
     public DateTime CreatedAt {  get; set; }

@@ -34,7 +34,7 @@ public sealed class DVDMap: IEntityTypeConfiguration<DVD>
 
         builder.Property(x => x.Published)
             .HasColumnName("Published")
-            .HasColumnType("timestamp")
+            .HasColumnType("date")
             .IsRequired();
 
         builder.Property(x => x.CreatedAt)
