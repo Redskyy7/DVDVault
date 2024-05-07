@@ -65,7 +65,7 @@ public class SoftDeleteDirectorHandler : ISoftDeleteDirectorHandler
         var deleted = await _directorRepository.SoftDelete(directorDB.Id, directorDB);
         if (deleted == false)
             return new DeleteDirectorError(StatusCode: HttpStatusCode.InternalServerError,
-                                     Message: "There was a failure in user deletion. Please try again later.");
+                                     Message: "There was a failure in director deletion. Please try again later.");
 
         await _unitOfWork.Commit(cancellationToken);
 

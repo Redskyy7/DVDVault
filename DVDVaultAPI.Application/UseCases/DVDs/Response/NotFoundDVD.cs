@@ -2,9 +2,9 @@
 using System.Net;
 
 namespace DVDVault.Application.UseCases.DVDs.Response;
-public class DeletedSuccessfully : IResponse
+public class NotFoundDVD : IResponse
 {
-    public DeletedSuccessfully(HttpStatusCode StatusCode, string Message)
+    public NotFoundDVD(HttpStatusCode StatusCode, string Message)
     {
         this.StatusCode = StatusCode;
         this.Message = Message;

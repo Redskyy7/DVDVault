@@ -15,6 +15,7 @@ public class DVD : Entity
         Genre = genre;
         Copies = copies;
         Published = published;
+        Available = true;
         DirectorId = directorId;
         CreatedAt = DateTime.Now;
     }
@@ -62,6 +63,20 @@ public class DVD : Entity
     {
         Genre = genre;
         UpdatedAt = DateTime.Now;
+        Validate();
+    }
+
+    public void SoftDelete()
+    {
+        Available = false;
+        DeletedAt = DateTime.Now;
+        Validate();
+    }
+
+    public void Activate()
+    {
+        Available = true;
+        DeletedAt = null;
         Validate();
     }
 }

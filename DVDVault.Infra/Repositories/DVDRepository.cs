@@ -41,4 +41,25 @@ public sealed class DVDRepository : IDVDRepository
 
         return updated != 0;
     }
+    public async Task<bool> SoftDelete(int id, DVD dvd)
+    {
+        var updated = await _context
+            .DVDs
+            .Where(x => x.Id == id)
+            .ExecuteUpdateAsync(x =>
+                            x.SetProperty(x => x.Available, dvd.Available)
+                            .SetProperty(x => x.DeletedAt, dvd.DeletedAt));
+
+        return updated != 0;
+    }
+
+    public async Task<bool> HardDelete(DVD dvd)
+    {
+        var deleted = await _context
+                            .DVDs
+                            .Where(x => x.Id == dvd.Id)
+                            .ExecuteDeleteAsync();
+
+        return deleted != 0;
+    }
 }

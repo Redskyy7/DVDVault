@@ -24,6 +24,7 @@ public class DVDService : IDVDService
         {
             var dvds = await _context.DVDs
                 .AsNoTracking()
+                .Where(x => x.Available == true)
                 .Select(x => new DVDDTO
                 {
                     Id = x.Id,
@@ -63,7 +64,7 @@ public class DVDService : IDVDService
 
             dvd = await _context.DVDs
                 .AsNoTracking()
-                .Where(x => x.Id == id)
+                .Where(x => x.Id == id && x.Available == true)
                 .Select(x => new DVDDTO
                 {
                     Id = x.Id,

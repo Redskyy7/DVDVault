@@ -14,12 +14,16 @@ public class DVDController : ControllerBase
     private readonly ICreateDVDHandler _createDVDHandler;
     private readonly IUpdateDVDTitleHandler _updateDVDTitleHandler;
     private readonly IDVDService _dvdService;
+    private readonly ISoftDeleteDVDHandler _softDeleteDVDHandler;
+    private readonly IHardDeleteDVDHandler _hardDeleteDVDHandler;
 
-    public DVDController(ICreateDVDHandler createDVDHandler, IUpdateDVDTitleHandler updateDVDTitleHandler, IDVDService dvdService)
+    public DVDController(ICreateDVDHandler createDVDHandler, IUpdateDVDTitleHandler updateDVDTitleHandler, IDVDService dvdService, ISoftDeleteDVDHandler softDeleteDVDHandler, IHardDeleteDVDHandler hardDeleteDVDHandler)
     {
         _createDVDHandler = createDVDHandler;
         _updateDVDTitleHandler = updateDVDTitleHandler;
         _dvdService = dvdService;
+        _softDeleteDVDHandler = softDeleteDVDHandler;
+        _hardDeleteDVDHandler = hardDeleteDVDHandler;
     }
 
     [HttpPost]
@@ -62,5 +66,31 @@ public class DVDController : ControllerBase
         var dvd = await _dvdService.GetByIdAsync(id);
 
         return Ok(dvd);
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> SoftDeleteDVD(SoftDeleteDVDRequest request, CancellationToken cancellationToken)
+    {
+        var response = await _softDeleteDVDHandler.Handle(request, cancellationToken);
+
+        if (response.StatusCode == HttpStatusCode.BadRequest)
+            return BadRequest(response);
+        if (response.StatusCode == HttpStatusCode.InternalServerError)
+            return StatusCode(500);
+
+        return Ok(response);
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> HardDeleteDVD(HardDeleteDVDRequest request, CancellationToken cancellationToken)
+    {
+        var response = await _hardDeleteDVDHandler.Handle(request, cancellationToken);
+
+        if (response.StatusCode == HttpStatusCode.BadRequest)
+            return BadRequest(response);
+        if (response.StatusCode == HttpStatusCode.InternalServerError)
+            return StatusCode(500);
+
+        return Ok(response);
     }
 }

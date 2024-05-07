@@ -44,6 +44,8 @@ public static class ServicesExtension
     {
         builder.Services.AddScoped<ICreateDVDHandler, CreateDVDHandler>();
         builder.Services.AddScoped<IUpdateDVDTitleHandler, UpdateDVDTitleHandler>();
+        builder.Services.AddScoped<ISoftDeleteDVDHandler, SoftDeleteDVDHandler>();
+        builder.Services.AddScoped<IHardDeleteDVDHandler, HardDeleteDVDHandler>();
     }
 
     private static void AddServices(WebApplicationBuilder builder)
