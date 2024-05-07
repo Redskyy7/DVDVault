@@ -1,6 +1,7 @@
 ﻿using DVDVault.Domain.Enums;
 using DVDVault.Shared.Entities;
 using DVDVault.Shared.Extensions;
+using System.Xml.Linq;
 using Errors = System.Collections.Generic.List<System.Collections.Generic.Dictionary<string, string>>;
 
 namespace DVDVault.Domain.Models;
@@ -49,4 +50,18 @@ public class DVD : Entity
     public int DirectorId { get; set; }
 
     public Director? Director { get; set; }
+
+    public void UpdateTitle(string title)
+    {
+        Title = title;
+        UpdatedAt = DateTime.Now;
+        Validate();
+    }
+
+    public void UpdateGenre(GenreEnum genre)
+    {
+        Genre = genre;
+        UpdatedAt = DateTime.Now;
+        Validate();
+    }
 }

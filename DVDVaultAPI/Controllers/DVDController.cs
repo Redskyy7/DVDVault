@@ -11,10 +11,13 @@ namespace DVDVault.WebAPI.Controllers;
 public class DVDController : ControllerBase
 {
     private readonly ICreateDVDHandler _createDVDHandler;
+    private readonly IUpdateDVDTitleHandler _updateDVDTitleHandler;
 
-    public DVDController(ICreateDVDHandler createDVDHandler)
+    public DVDController(ICreateDVDHandler createDVDHandler, IUpdateDVDTitleHandler updateDVDTitleHandler)
     {
         _createDVDHandler = createDVDHandler;
+        _updateDVDTitleHandler = updateDVDTitleHandler;
+
     }
 
     [HttpPost]
@@ -28,5 +31,23 @@ public class DVDController : ControllerBase
             return BadRequest(response);
 
         return Created("/DVD/CreateDVD", response.Message);
+    }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UpdatedSuccessfully))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(InvalidRequest))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(UpdateDVDError))]
+
+    public async Task<IActionResult> UpdateDVDTitle(UpdateDVDTitleRequest request, CancellationToken cancellationToken)
+    {
+        var response = await _updateDVDTitleHandler.Handle(request, cancellationToken);
+
+        if (response.StatusCode == HttpStatusCode.BadRequest)
+            return BadRequest(response);
+
+        if (response.StatusCode == HttpStatusCode.InternalServerError)
+            return StatusCode(500);
+
+        return Ok(response);
     }
 }
