@@ -9,7 +9,7 @@ public class DVD : Entity
 {
     public DVD() { }
 
-    public DVD(string title, GenreEnum genre, DateTime published, int copies, int directorId)
+    public DVD(string title, string genre, DateTime published, int copies, int directorId)
     {
         Title = title;
         Genre = genre;
@@ -33,7 +33,7 @@ public class DVD : Entity
 
     public string Title { get; set; } = null!;
 
-    public GenreEnum Genre { get; set; }
+    public string Genre { get; set; } = null!;
 
     public DateTime Published { get; set; }
 
@@ -58,7 +58,7 @@ public class DVD : Entity
         Validate();
     }
 
-    public void UpdateGenre(GenreEnum genre)
+    public void UpdateGenre(string genre)
     {
         Genre = genre;
         UpdatedAt = DateTime.Now;

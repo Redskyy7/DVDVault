@@ -1,7 +1,6 @@
 ﻿using DVDVault.Application.Abstractions.DVDs;
 using DVDVault.Application.Abstractions.Response;
-using DVDVault.Application.UseCases.Directors.Request;
-using DVDVault.Application.UseCases.Directors.Response;
+using DVDVault.Application.UseCases.DVDs.Response;
 using DVDVault.Application.UseCases.DVDs.Request;
 using DVDVault.Domain.Interfaces.Abstractions;
 using DVDVault.Domain.Interfaces.Repositories;
@@ -31,7 +30,6 @@ public class CreateDVDHandler : ICreateDVDHandler
                                         Message: "Invalid request. Please validate the provided data.",
                                         Errors: result.Errors.ToDictionary(error => error.PropertyName, error => error.ErrorMessage));
         }
-
         try
         {
             return await AddDVDAsync(request, cancellationToken);
@@ -50,7 +48,7 @@ public class CreateDVDHandler : ICreateDVDHandler
     private async Task<IResponse> AddDVDAsync(CreateDVDRequest request, CancellationToken cancellationToken)
     {
         DVD dvd= new DVD(title: request.Title!.Trim(),
-                        genre: request.Genre,
+                        genre: request.Genre!,
                         published: request.Published!,
                         copies: request.Copies!,
                         directorId: request.DirectorId!

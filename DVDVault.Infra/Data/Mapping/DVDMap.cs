@@ -46,7 +46,7 @@ public sealed class DVDMap: IEntityTypeConfiguration<DVD>
             .HasColumnName("UpdatedAt")
             .HasColumnType("timestamp");
 
-        builder.Property(x => x.CreatedAt)
+        builder.Property(x => x.DeletedAt)
             .HasColumnName("DeletedAt")
             .HasColumnType("timestamp");
 

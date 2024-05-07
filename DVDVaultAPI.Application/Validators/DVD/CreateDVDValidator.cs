@@ -11,6 +11,9 @@ public class CreateDVDValidator : AbstractValidator<CreateDVDRequest>
                 .WithMessage("Invalid title.")
             .Length(2, 120)
                 .WithMessage("Title should have between 2 and 120 characters.");
+        RuleFor(x => x.Genre)
+            .NotEmpty()
+                .WithMessage("Invalid genre.");
         RuleFor(x => x.Copies)
             .NotEmpty()
                 .WithMessage("Invalid copies.")

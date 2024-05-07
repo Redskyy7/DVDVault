@@ -3,9 +3,11 @@ using DVDVault.Application.Abstractions.DVDs;
 using DVDVault.Application.UseCases.Directors.Handler;
 using DVDVault.Application.UseCases.DVDs.Handler;
 using DVDVault.Domain.Interfaces.Repositories;
+using DVDVault.Domain.Interfaces.Services;
 using DVDVault.Domain.Interfaces.UnitOfWork;
 using DVDVault.Infra.Data.Context;
 using DVDVault.Infra.Repositories;
+using DVDVault.Infra.Services;
 using DVDVault.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +27,7 @@ public static class ServicesExtension
         AddDirectorHandlers(builder);
         AddDVDHandlers(builder);
         AddRepository(builder);
+        AddServices(builder);
     }
 
     private static void AddDirectorHandlers(WebApplicationBuilder builder)
@@ -39,6 +42,12 @@ public static class ServicesExtension
     private static void AddDVDHandlers(WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<ICreateDVDHandler, CreateDVDHandler>();
+        builder.Services.AddScoped<IUpdateDVDTitleHandler, UpdateDVDTitleHandler>();
+    }
+
+    private static void AddServices(WebApplicationBuilder builder)
+    {
+        builder.Services.AddScoped<IDVDService, DVDService>();
     }
 
     private static void AddRepository(WebApplicationBuilder builder)
