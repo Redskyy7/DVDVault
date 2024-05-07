@@ -5,10 +5,10 @@ using FluentValidation.Results;
 namespace DVDVault.Application.UseCases.Directors.Request;
 public class CreateDirectorRequest : IRequest
 {
-    public CreateDirectorRequest()
+    public CreateDirectorRequest(string name, string surname)
     {
-        Name = Name;
-        Surname = Surname;
+        Name = name;
+        Surname = surname;
     }
 
     public string? Name { get; set; }

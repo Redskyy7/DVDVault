@@ -8,7 +8,7 @@ public class CreateDirectorValidator : AbstractValidator<CreateDirectorRequest>
     {
         RuleFor(x => x.Name)
             .NotEmpty()
-                .WithMessage("Invalid name")
+                .WithMessage("Invalid name.")
             .Length(2, 20)
                 .WithMessage("Name should have between 2 and 20 characters.");
 

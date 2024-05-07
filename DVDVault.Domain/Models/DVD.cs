@@ -1,9 +1,32 @@
 ﻿using DVDVault.Domain.Enums;
 using DVDVault.Shared.Entities;
+using DVDVault.Shared.Extensions;
+using Errors = System.Collections.Generic.List<System.Collections.Generic.Dictionary<string, string>>;
 
 namespace DVDVault.Domain.Models;
 public class DVD : Entity
 {
+    public DVD() { }
+
+    public DVD(string title, GenreEnum genre, DateTime published, int copies, int directorId)
+    {
+        Title = title;
+        Genre = genre;
+        Copies = copies;
+        Published = published;
+        DirectorId = directorId;
+        CreatedAt = DateTime.Now;
+    }
+
+    public void Validate()
+    {
+        var errors = new Errors();
+        errors.AddRange(this.CheckIfPropertiesIsNull());
+        if (errors.Count > 0 )
+        {
+            AddNotification(errors);
+        }
+    }
 
     public int Id { get; set; }
 
