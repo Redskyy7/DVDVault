@@ -38,4 +38,4 @@ Após seguir essas etapas, seu ambiente local estará configurado e pronto para 
 
 ### Arquitetura
 
-![Arquitetura](DVDVault Architecture.drawio.png)
+![Arquitetura]([DVDVault Architecture.drawio.png](https://github.com/Redskyy7/DVDVault/blob/master/DVDVault%20Architecture.drawio.png))
