@@ -9,20 +9,23 @@ using DVDVault.Domain.Models;
 using System.Net;
 
 namespace DVDVault.Application.UseCases.DVDs.Handler;
-public class UpdateDVDTitleHandler : IUpdateDVDTitleHandler
+public class ReturnCopyHandler : IReturnCopyHandler
 {
     private readonly IDVDRepository _dvdRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public UpdateDVDTitleHandler() { }
+    public ReturnCopyHandler()
+    {
+        
+    }
 
-    public UpdateDVDTitleHandler(IDVDRepository dvdRepository, IUnitOfWork unitOfWork)
+    public ReturnCopyHandler(IDVDRepository dvdRepository, IUnitOfWork unitOfWork)
     {
         _dvdRepository = dvdRepository;
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IResponse> Handle(UpdateDVDTitleRequest request, CancellationToken cancellationToken)
+    public async Task<IResponse> Handle(ReturnCopyDVDRequest request, CancellationToken cancellationToken)
     {
         var result = request.Validate();
         if (!result.IsValid)
@@ -40,12 +43,12 @@ public class UpdateDVDTitleHandler : IUpdateDVDTitleHandler
                                             Message: "Provided DVD is not registered");
             #endregion
 
-            return await UpdateDVDTitle(request, dvdDB, cancellationToken);
+            return await ReturnCopy(request, dvdDB, cancellationToken);
         }
         catch (Exception ex)
         {
             _unitOfWork.Rollback();
-            throw new Exception($"Error while updating DVD. Details: {ex.Message}");
+            throw new Exception($"Error while returning DVD. Details: {ex.Message}");
         }
         finally
         {
@@ -53,23 +56,23 @@ public class UpdateDVDTitleHandler : IUpdateDVDTitleHandler
         }
     }
 
-    private async Task<IResponse> UpdateDVDTitle(UpdateDVDTitleRequest request, DVD dvdDB, CancellationToken cancellationToken)
+    private async Task<IResponse> ReturnCopy(ReturnCopyDVDRequest request, DVD dvdDB, CancellationToken cancellationToken)
     {
-        dvdDB.UpdateTitle(request.Title.Trim());
+        dvdDB.ReturnCopy();
         if (!dvdDB.IsValid)
             return new DomainNotification(StatusCode: HttpStatusCode.BadRequest,
                                             Errors: dvdDB.Errors);
 
         _unitOfWork.BeginTransaction();
 
-        var updated = await _dvdRepository.UpdateTitleAsync(request.DVDId, dvdDB);
-        if (updated == false)
+        var returned = await _dvdRepository.UpdateCopiesAsync(request.DVDId, dvdDB);
+        if (returned == false)
             return new UpdateDVDError(StatusCode: HttpStatusCode.InternalServerError,
                                         Message: "There was a failure in updating DVD data. Please try again later.");
 
         await _unitOfWork.Commit(cancellationToken);
 
         return new UpdatedSuccessfully(StatusCode: HttpStatusCode.OK,
-                                    Message: $"{dvdDB.Title} updated successfully.");
+            Message: $"{dvdDB.Title} returned successfully");
     }
 }

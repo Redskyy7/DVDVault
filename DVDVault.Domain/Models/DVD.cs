@@ -79,4 +79,14 @@ public class DVD : Entity
         DeletedAt = null;
         Validate();
     }
+
+    public void RentCopy()
+    {
+        Copies -= 1;
+    }
+
+    public void ReturnCopy()
+    {
+        Copies += 1;
+    }
 }

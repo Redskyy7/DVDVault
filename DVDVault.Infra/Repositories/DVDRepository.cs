@@ -2,6 +2,7 @@
 using DVDVault.Domain.Models;
 using DVDVault.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace DVDVault.Infra.Repositories;
 public sealed class DVDRepository : IDVDRepository
@@ -41,6 +42,18 @@ public sealed class DVDRepository : IDVDRepository
 
         return updated != 0;
     }
+
+    public async Task<bool> UpdateCopiesAsync(int id, DVD dvd)
+    {
+        var rented = await _context
+            .DVDs
+            .Where(x => x.Id == id)
+            .ExecuteUpdateAsync(x =>
+                                x.SetProperty(x => x.Copies, dvd.Copies));
+
+        return rented != 0;
+    }
+
     public async Task<bool> SoftDelete(int id, DVD dvd)
     {
         var updated = await _context

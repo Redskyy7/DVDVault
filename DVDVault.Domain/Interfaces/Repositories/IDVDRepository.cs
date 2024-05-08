@@ -8,6 +8,7 @@ public interface IDVDRepository
     Task<bool> UpdateTitleAsync(int id, DVD dvd);
     public Task<bool> SoftDelete(int id, DVD dvd);
     public Task<bool> HardDelete(DVD dvd);
+    public Task<bool> UpdateCopiesAsync(int id, DVD dvd);
 
     //Task<bool> UpdateGenreAsync(int id, DVD dvd);
 }
