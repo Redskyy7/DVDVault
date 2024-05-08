@@ -35,3 +35,7 @@ Este comando aplicará todas as migrações pendentes e garantirá que seu banco
 Após seguir essas etapas, seu ambiente local estará configurado e pronto para executar o projeto sem problemas.
 
 ---
+
+### Arquitetura
+
+![Arquitetura](DVDVault Architecture.drawio.png)
